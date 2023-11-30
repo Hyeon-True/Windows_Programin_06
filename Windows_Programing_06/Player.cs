@@ -95,6 +95,10 @@ namespace Windows_Programing_06
 
             IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
             TotalTime.Text = totalTimeElement.Text;
+
+            TotalTime.Text = totalTimeElement.Text;
+            minute = 0;
+            second = 0;
         }
 
         private void Next_Song_Burton_Click(object sender, EventArgs e)
@@ -115,6 +119,8 @@ namespace Windows_Programing_06
 
             // 전체 시간 가져오기(유튜브 재생시간 표시)
             TotalTime.Text = totalTimeElement.Text;
+            minute = 0;
+            second = 0;
         }
 
         private void Play_Button_Click(object sender, EventArgs e)
@@ -135,7 +141,13 @@ namespace Windows_Programing_06
                 minute = minute + 1;
                 second = 0;
             }
-            Current_Time_Label.Text = string.Format("{0:D2}:{1:D2}", minute, second);
+
+            Current_Time_Label.Text = string.Format("{0:D1}:{1:D2}", minute, second);
+
+            if (Current_Time_Label.Text == TotalTime.Text)
+            {
+                Next_Song_Burton_Click(sender, new EventArgs());
+            }
         }
     }
 }

@@ -203,9 +203,9 @@
             this.TotalTime.AutoSize = true;
             this.TotalTime.Location = new System.Drawing.Point(371, 288);
             this.TotalTime.Name = "TotalTime";
-            this.TotalTime.Size = new System.Drawing.Size(33, 12);
+            this.TotalTime.Size = new System.Drawing.Size(27, 12);
             this.TotalTime.TabIndex = 10;
-            this.TotalTime.Text = "00:00";
+            this.TotalTime.Text = "0:00";
             // 
             // Current_Time_Label
             // 

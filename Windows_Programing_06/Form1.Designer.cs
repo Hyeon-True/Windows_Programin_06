@@ -77,6 +77,7 @@
             this.Import_Playlist_button.TabIndex = 1;
             this.Import_Playlist_button.Text = "가져오기";
             this.Import_Playlist_button.UseSelectable = true;
+            this.Import_Playlist_button.Click += new System.EventHandler(this.Import_Playlist_button_Click);
             // 
             // Play_Button
             // 
@@ -114,6 +115,7 @@
             this.metroListView2.TabIndex = 4;
             this.metroListView2.UseCompatibleStateImageBehavior = false;
             this.metroListView2.UseSelectable = true;
+            this.metroListView2.View = System.Windows.Forms.View.List;
             // 
             // numberHeader
             // 

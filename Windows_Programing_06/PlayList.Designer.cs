@@ -52,7 +52,7 @@
             this.Playlist_ID_Input_Window.CustomButton.UseSelectable = true;
             this.Playlist_ID_Input_Window.CustomButton.Visible = false;
             this.Playlist_ID_Input_Window.Lines = new string[] {
-        "이곳에 재생목록 주소를 입력하여 주세요"};
+        "PL2RoBx1zkmMuE2F7RlzbUeLK8KkfC3pXX"};
             this.Playlist_ID_Input_Window.Location = new System.Drawing.Point(24, 97);
             this.Playlist_ID_Input_Window.MaxLength = 32767;
             this.Playlist_ID_Input_Window.Name = "Playlist_ID_Input_Window";
@@ -64,7 +64,7 @@
             this.Playlist_ID_Input_Window.ShortcutsEnabled = true;
             this.Playlist_ID_Input_Window.Size = new System.Drawing.Size(458, 23);
             this.Playlist_ID_Input_Window.TabIndex = 0;
-            this.Playlist_ID_Input_Window.Text = "이곳에 재생목록 주소를 입력하여 주세요";
+            this.Playlist_ID_Input_Window.Text = "PL2RoBx1zkmMuE2F7RlzbUeLK8KkfC3pXX";
             this.Playlist_ID_Input_Window.UseSelectable = true;
             this.Playlist_ID_Input_Window.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.Playlist_ID_Input_Window.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);

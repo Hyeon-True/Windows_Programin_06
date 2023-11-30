@@ -120,6 +120,22 @@ namespace Windows_Programing_06
         private void Play_Button_Click(object sender, EventArgs e)
         {
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            MusicTimer.Start();
+        }
+
+        int minute = 0;
+        int second = 0;
+
+        private void MusicTimer_Tick(object sender, EventArgs e)
+        {
+            MusicTimer.Interval = 1000;
+            second = second + 1;
+            if (second == 60)
+            {
+                minute = minute + 1;
+                second = 0;
+            }
+            Current_Time_Label.Text = string.Format("{0:D2}:{1:D2}", minute, second);
         }
     }
 }

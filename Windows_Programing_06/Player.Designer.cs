@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Playlist_Add_Text_Box = new MetroFramework.Controls.MetroTextBox();
             this.Add_Music_Button = new MetroFramework.Controls.MetroButton();
             this.PlayListViewer = new MetroFramework.Controls.MetroListView();
@@ -36,7 +37,10 @@
             this.Previous_Song_Button = new MetroFramework.Controls.MetroButton();
             this.Play_Button = new MetroFramework.Controls.MetroButton();
             this.Next_Song_Burton = new MetroFramework.Controls.MetroButton();
-            this.TotalTime = new MetroFramework.Drawing.Html.HtmlLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TotalTime = new System.Windows.Forms.Label();
+            this.Current_Time_Label = new System.Windows.Forms.Label();
+            this.MusicTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // Playlist_Add_Text_Box
@@ -185,24 +189,45 @@
             this.Next_Song_Burton.UseSelectable = true;
             this.Next_Song_Burton.Click += new System.EventHandler(this.Next_Song_Burton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(363, 287);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "/";
+            // 
             // TotalTime
             // 
-            this.TotalTime.AutoScroll = true;
-            this.TotalTime.AutoScrollMinSize = new System.Drawing.Size(38, 22);
-            this.TotalTime.AutoSize = false;
-            this.TotalTime.BackColor = System.Drawing.SystemColors.Window;
-            this.TotalTime.Location = new System.Drawing.Point(380, 287);
+            this.TotalTime.AutoSize = true;
+            this.TotalTime.Location = new System.Drawing.Point(371, 288);
             this.TotalTime.Name = "TotalTime";
-            this.TotalTime.Size = new System.Drawing.Size(38, 23);
-            this.TotalTime.TabIndex = 8;
+            this.TotalTime.Size = new System.Drawing.Size(33, 12);
+            this.TotalTime.TabIndex = 10;
             this.TotalTime.Text = "00:00";
+            // 
+            // Current_Time_Label
+            // 
+            this.Current_Time_Label.AutoSize = true;
+            this.Current_Time_Label.Location = new System.Drawing.Point(338, 288);
+            this.Current_Time_Label.Name = "Current_Time_Label";
+            this.Current_Time_Label.Size = new System.Drawing.Size(27, 12);
+            this.Current_Time_Label.TabIndex = 11;
+            this.Current_Time_Label.Text = "0:00";
+            // 
+            // MusicTimer
+            // 
+            this.MusicTimer.Tick += new System.EventHandler(this.MusicTimer_Tick);
             // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 450);
+            this.Controls.Add(this.Current_Time_Label);
             this.Controls.Add(this.TotalTime);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Next_Song_Burton);
             this.Controls.Add(this.Play_Button);
             this.Controls.Add(this.Previous_Song_Button);
@@ -214,6 +239,7 @@
             this.Name = "Player";
             this.Text = "뮤직플레이어";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -227,6 +253,9 @@
         private MetroFramework.Controls.MetroButton Previous_Song_Button;
         private MetroFramework.Controls.MetroButton Play_Button;
         private MetroFramework.Controls.MetroButton Next_Song_Burton;
-        private MetroFramework.Drawing.Html.HtmlLabel TotalTime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label TotalTime;
+        private System.Windows.Forms.Label Current_Time_Label;
+        private System.Windows.Forms.Timer MusicTimer;
     }
 }

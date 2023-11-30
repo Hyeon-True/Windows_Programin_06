@@ -16,6 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
 using System.Net;
 using System.Web.UI.WebControls;
+using MetroFramework.Drawing.Html;
 
 namespace Windows_Programing_06
 {
@@ -65,7 +66,7 @@ namespace Windows_Programing_06
 
             // 전체 시간 가져오기(유튜브 재생시간 표시)
             string totalTime = totalTimeElement.Text;
-            Console.WriteLine(totalTime);
+            TotalTime.Text = totalTime;
         }
 
         // 노래를 listBox1에 추가하는 과정에서 title을 youtube에서 가져오기 위해 작성
@@ -96,6 +97,59 @@ namespace Windows_Programing_06
             string[] strings = data[20].Split(new string[] { "<meta name=\"title\" content=\"" }, StringSplitOptions.None);
             string name = strings[1].Split(new string[] { "\">" }, StringSplitOptions.None)[0];
             return HttpUtility.HtmlDecode(name);
+        }
+
+        private void Add_Music_Button_Click(object sender, EventArgs e)
+        {
+            Playlist_ArrayList.Add(Playlist_Add_Text_Box.Text);
+            PlayListViewer.Items.Add(getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
+        }
+
+        private void Previous_Song_Button_Click(object sender, EventArgs e)
+        {
+            if (index == 0)
+            {
+                index = 0;
+                MessageBox.Show("첫번째 곡입니다.");
+            }
+            else
+            {
+                index -= 1;
+            }
+
+            Play_Music_Address.Text = "";
+            Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
+            chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            Play_Music_Title.Text = chromeDriver.Title.ToString();
+            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+
+            IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
+            TotalTime.Text = totalTimeElement.Text;
+        }
+
+        private void Next_Song_Burton_Click(object sender, EventArgs e)
+        {
+            if (index >= Playlist_ArrayList.Count)
+            {
+                index--;
+                MessageBox.Show("마지막 곡입니다.\n 노래를 추가해주세요");
+            }
+            index += 1;
+            Play_Music_Address.Text = "";
+            Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
+            chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            Play_Music_Title.Text = chromeDriver.Title.ToString();
+            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+
+            IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
+
+            // 전체 시간 가져오기(유튜브 재생시간 표시)
+            TotalTime.Text = totalTimeElement.Text;
+        }
+
+        private void Play_Button_Click(object sender, EventArgs e)
+        {
+            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
         }
     }
 }

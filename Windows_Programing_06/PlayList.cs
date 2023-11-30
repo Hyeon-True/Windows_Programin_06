@@ -56,5 +56,12 @@ namespace Windows_Programing_06
                 metroListView2.Items.Add("URL : https://music.youtube.com/watch?v=" + playlistItem.Snippet.ResourceId.VideoId);
             }
         }
+
+        private void Play_Button_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Player player = new Player();
+            player.ShowDialog();
+        }
     }
 }

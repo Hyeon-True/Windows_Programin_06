@@ -32,9 +32,9 @@
             this.Import_Playlist_button = new MetroFramework.Controls.MetroButton();
             this.Play_Button = new MetroFramework.Controls.MetroButton();
             this.metroListView1 = new MetroFramework.Controls.MetroListView();
-            this.metroListView2 = new MetroFramework.Controls.MetroListView();
             this.numberHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.titleHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroListView2 = new MetroFramework.Controls.MetroListView();
             this.SuspendLayout();
             // 
             // Playlist_ID_Input_Window
@@ -87,6 +87,7 @@
             this.Play_Button.TabIndex = 2;
             this.Play_Button.Text = "재생";
             this.Play_Button.UseSelectable = true;
+            this.Play_Button.Click += new System.EventHandler(this.Play_Button_Click);
             // 
             // metroListView1
             // 
@@ -104,6 +105,16 @@
             this.metroListView1.UseSelectable = true;
             this.metroListView1.View = System.Windows.Forms.View.Details;
             // 
+            // numberHeader
+            // 
+            this.numberHeader.Text = "번호";
+            this.numberHeader.Width = 100;
+            // 
+            // titleHeader
+            // 
+            this.titleHeader.Text = "제목";
+            this.titleHeader.Width = 690;
+            // 
             // metroListView2
             // 
             this.metroListView2.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -117,17 +128,7 @@
             this.metroListView2.UseSelectable = true;
             this.metroListView2.View = System.Windows.Forms.View.List;
             // 
-            // numberHeader
-            // 
-            this.numberHeader.Text = "번호";
-            this.numberHeader.Width = 100;
-            // 
-            // titleHeader
-            // 
-            this.titleHeader.Text = "제목";
-            this.titleHeader.Width = 690;
-            // 
-            // Form1
+            // PlayList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -137,7 +138,7 @@
             this.Controls.Add(this.Play_Button);
             this.Controls.Add(this.Import_Playlist_button);
             this.Controls.Add(this.Playlist_ID_Input_Window);
-            this.Name = "Form1";
+            this.Name = "PlayList";
             this.Text = "재생목록";
             this.ResumeLayout(false);
 

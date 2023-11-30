@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Windows_Programing_06
 {
-    public partial class Form1 : MetroFramework.Forms.MetroForm
+    public partial class PlayList : MetroFramework.Forms.MetroForm
     {
         private String[] url;
         private String[] title;
@@ -21,7 +21,7 @@ namespace Windows_Programing_06
 
         YouTubeService youtube;
 
-        public Form1()
+        public PlayList()
         {
             InitializeComponent();
             youtube = new YouTubeService(new BaseClientService.Initializer
@@ -50,8 +50,8 @@ namespace Windows_Programing_06
 
                 metroListView1.Items.Add(item);
                 metroListView2.Items.Add((playlistItem.Snippet.Title));
-                Play_List.playlist.Add_Play_List_Title(playlistItem.Snippet.Title);
-                Play_List.playlist.Add_Play_List("https://youtube.com/watch?v=" + playlistItem.Snippet.ResourceId.VideoId);
+                Get_Play_List.playlist.Add_Play_List_Title(playlistItem.Snippet.Title);
+                Get_Play_List.playlist.Add_Play_List("https://youtube.com/watch?v=" + playlistItem.Snippet.ResourceId.VideoId);
 
                 metroListView2.Items.Add("URL : https://music.youtube.com/watch?v=" + playlistItem.Snippet.ResourceId.VideoId);
             }

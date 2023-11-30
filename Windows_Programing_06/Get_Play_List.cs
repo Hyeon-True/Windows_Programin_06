@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Windows_Programing_06
 {
-    internal class Play_List
+    internal class Get_Play_List
     {
-        public static Play_List playlist = new Play_List();
+        public static Get_Play_List playlist = new Get_Play_List();
 
         private ArrayList play_list;
         private ArrayList play_list_title;
 
-        public Play_List()
+        public Get_Play_List()
         {
             play_list = new ArrayList();
             play_list_title = new ArrayList();

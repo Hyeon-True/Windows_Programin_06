@@ -44,13 +44,13 @@ namespace Windows_Programing_06
         public Player()
         {
             InitializeComponent();
-            Playlist_ArrayList = Get_Play_List.playlist.Get_Play_List();
+            Playlist_ArrayList = Get_Play_List.playlist._Play_List;
             Playlist_Title_ArrayList = Get_Play_List.playlist.Get_Play_List_Title();
             Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
 
             for (int x = 0; x < Playlist_ArrayList.Count; x++)
             {
-                PlayListViewer.Items.Add(getYoutubeVideoTitle(Playlist_ArrayList[x].ToString()));
+                PlayListViewer.Items.Add(Get_Play_List.getYoutubeVideoTitle(Playlist_ArrayList[x].ToString()));
             }
 
             chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
@@ -69,40 +69,10 @@ namespace Windows_Programing_06
             TotalTime.Text = totalTime;
         }
 
-        // 노래를 listBox1에 추가하는 과정에서 title을 youtube에서 가져오기 위해 작성
-        private static string[] getYoutubeTitle(string url)
-        {
-            string responseText = string.Empty;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.Timeout = 30 * 1000;
-
-            using (HttpWebResponse resp = (HttpWebResponse)request.GetResponse())
-            {
-                HttpStatusCode status = resp.StatusCode;
-                Console.WriteLine(status);
-                Stream respStream = resp.GetResponseStream();
-                using (StreamReader sr = new StreamReader(respStream))
-                {
-                    responseText = sr.ReadToEnd();
-                }
-            }
-            return responseText.Split('\n');
-        }
-
-        // 노래를 listBox1에 추가하는 과정에서 title을 youtube에서 가져오기 위해 작성
-        private static string getYoutubeVideoTitle(string url)
-        {
-            string[] data = getYoutubeTitle(url);
-            string[] strings = data[20].Split(new string[] { "<meta name=\"title\" content=\"" }, StringSplitOptions.None);
-            string name = strings[1].Split(new string[] { "\">" }, StringSplitOptions.None)[0];
-            return HttpUtility.HtmlDecode(name);
-        }
-
         private void Add_Music_Button_Click(object sender, EventArgs e)
         {
             Playlist_ArrayList.Add(Playlist_Add_Text_Box.Text);
-            PlayListViewer.Items.Add(getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
+            PlayListViewer.Items.Add(Get_Play_List.getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
         }
 
         private void Previous_Song_Button_Click(object sender, EventArgs e)

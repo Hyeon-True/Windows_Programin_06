@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Windows_Programing_06
 {
-    public partial class Form2 : Form
+    public partial class Player : MetroFramework.Forms.MetroForm
     {
-        public Form2()
+        public Player()
         {
             InitializeComponent();
         }

@@ -29,21 +29,28 @@ namespace Windows_Programing_06
 
         private string url = "https://www.youtube.com/watch?v=pyf8cbqyfPs";
 
-        static ChromeDriverService chromeDriverService = ChromeDriverService.CreateDefaultService();
-        static ChromeOptions options = initbrowser();
+        private ChromeOptions chromeOptions; //Default value of chromeOptions is null
+        private IWebDriver driver; //Default value of driver is null
 
-        private static ChromeOptions initbrowser()
+        public void LoadChrome()
         {
-            var option = new ChromeOptions();
-            // (밑에 두개)테스트를 위해서 주석 처리함 실제 동작에서는 주석 해제 하고 사용해야할 필요성 있음
-            // chromeDriverService.HideCommandPromptWindow = true;
-            // option.AddArgument("headless");
-            return option;
+            try
+            {
+                Environment.SetEnvironmentVariable("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+                chromeOptions = new ChromeOptions();
+                chromeOptions.BinaryLocation = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
+                ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+                //driverService.HideCommandPromptWindow = true;
+                //chromeOptions.AddArgument("--headless");
+                driver = new ChromeDriver(driverService, chromeOptions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        ChromeDriver chromeDriver = new ChromeDriver(chromeDriverService, options);
-
-        public Player()
+            public Player()
         {
             InitializeComponent();
             Playlist_ArrayList = Get_Play_List.playlist._Play_List;
@@ -59,7 +66,11 @@ namespace Windows_Programing_06
 
             try
             {
-                chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+                LoadChrome();
+                driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+                Play_Music_Title.Text = driver.Title.ToString();
+                MusicTimer.Stop();
+
             }
             catch (Exception e) 
             {
@@ -68,7 +79,7 @@ namespace Windows_Programing_06
 
             try
             {
-                chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+                driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
             }
             catch (Exception e)
             {
@@ -76,12 +87,12 @@ namespace Windows_Programing_06
             }
 
             // 크롬 드라이버 css를 통해서 버튼을 클릭하여 원하는 동작을 실행
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
             Thread.Sleep(1000);
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
+            driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             // 전체 시간 요소 찾기 (이 부분은 웹 페이지의 HTML 구조에 따라 조절해야 함)
-            IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
+            IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
 
             // 전체 시간 가져오기(유튜브 재생시간 표시)
             string totalTime = totalTimeElement.Text;
@@ -109,10 +120,10 @@ namespace Windows_Programing_06
 
             Play_Music_Address.Text = "";
             Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
-            chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
-            Play_Music_Title.Text = chromeDriver.Title.ToString();
+            driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            Play_Music_Title.Text = driver.Title.ToString();
 
-            IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
+            IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
             TotalTime.Text = totalTimeElement.Text;
 
             TotalTime.Text = totalTimeElement.Text;
@@ -130,10 +141,10 @@ namespace Windows_Programing_06
             index += 1;
             Play_Music_Address.Text = "";
             Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
-            chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
-            Play_Music_Title.Text = chromeDriver.Title.ToString();
+            driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            Play_Music_Title.Text = driver.Title.ToString();
 
-            IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
+            IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
 
             // 전체 시간 가져오기(유튜브 재생시간 표시)
             TotalTime.Text = totalTimeElement.Text;
@@ -143,7 +154,7 @@ namespace Windows_Programing_06
 
         private void Play_Button_Click(object sender, EventArgs e)
         {
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
             MusicTimer.Start();
         }
 
@@ -169,7 +180,7 @@ namespace Windows_Programing_06
 
         private void Player_FormClosed(object sender, FormClosedEventArgs e)
         {
-            chromeDriver.Quit();
+            driver.Quit();
         }
     }
 }

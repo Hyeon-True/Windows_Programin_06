@@ -17,6 +17,7 @@ using System.IO;
 using System.Net;
 using System.Web.UI.WebControls;
 using MetroFramework.Drawing.Html;
+using System.Threading;
 
 namespace Windows_Programing_06
 {
@@ -33,9 +34,9 @@ namespace Windows_Programing_06
         private static ChromeOptions initbrowser()
         {
             var option = new ChromeOptions();
-            // 테스트를 위해서 주석 처리함 실제 동작에서는 주석 해제 하고 사용해야할 필요성 있음
-            //chromeDriverService.HideCommandPromptWindow = true;
-            //option.AddArgument("headless");
+            // (밑에 두개)테스트를 위해서 주석 처리함 실제 동작에서는 주석 해제 하고 사용해야할 필요성 있음
+            chromeDriverService.HideCommandPromptWindow = true;
+            option.AddArgument("headless");
             return option;
         }
 
@@ -59,6 +60,7 @@ namespace Windows_Programing_06
 
             // 크롬 드라이버 css를 통해서 버튼을 클릭하여 원하는 동작을 실행
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            Thread.Sleep(1000);
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             // 전체 시간 요소 찾기 (이 부분은 웹 페이지의 HTML 구조에 따라 조절해야 함)
@@ -67,6 +69,7 @@ namespace Windows_Programing_06
             // 전체 시간 가져오기(유튜브 재생시간 표시)
             string totalTime = totalTimeElement.Text;
             TotalTime.Text = totalTime;
+            MusicTimer.Start();
         }
 
         private void Add_Music_Button_Click(object sender, EventArgs e)
@@ -92,6 +95,7 @@ namespace Windows_Programing_06
             chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
             Play_Music_Title.Text = chromeDriver.Title.ToString();
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
             TotalTime.Text = totalTimeElement.Text;
@@ -114,6 +118,7 @@ namespace Windows_Programing_06
             chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
             Play_Music_Title.Text = chromeDriver.Title.ToString();
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
 
@@ -141,7 +146,6 @@ namespace Windows_Programing_06
                 minute = minute + 1;
                 second = 0;
             }
-
             Current_Time_Label.Text = string.Format("{0:D1}:{1:D2}", minute, second);
 
             if (Current_Time_Label.Text == TotalTime.Text)

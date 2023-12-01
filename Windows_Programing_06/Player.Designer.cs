@@ -236,6 +236,7 @@
             this.Controls.Add(this.PlayListViewer);
             this.Controls.Add(this.Add_Music_Button);
             this.Controls.Add(this.Playlist_Add_Text_Box);
+            this.DoubleBuffered = false;
             this.Name = "Player";
             this.Text = "뮤직플레이어";
             this.ResumeLayout(false);

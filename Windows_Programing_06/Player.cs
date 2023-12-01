@@ -153,5 +153,10 @@ namespace Windows_Programing_06
                 Next_Song_Burton_Click(sender, new EventArgs());
             }
         }
+
+        private void Player_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            chromeDriver.Quit();
+        }
     }
 }

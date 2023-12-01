@@ -239,6 +239,7 @@
             this.DoubleBuffered = false;
             this.Name = "Player";
             this.Text = "뮤직플레이어";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Player_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

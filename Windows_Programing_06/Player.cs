@@ -28,6 +28,7 @@ namespace Windows_Programing_06
         public int index = 0;
 
         private string url = "https://www.youtube.com/watch?v=pyf8cbqyfPs";
+
         static ChromeDriverService chromeDriverService = ChromeDriverService.CreateDefaultService();
         static ChromeOptions options = initbrowser();
 
@@ -35,8 +36,8 @@ namespace Windows_Programing_06
         {
             var option = new ChromeOptions();
             // (밑에 두개)테스트를 위해서 주석 처리함 실제 동작에서는 주석 해제 하고 사용해야할 필요성 있음
-            chromeDriverService.HideCommandPromptWindow = true;
-            option.AddArgument("headless");
+            // chromeDriverService.HideCommandPromptWindow = true;
+            // option.AddArgument("headless");
             return option;
         }
 
@@ -54,9 +55,25 @@ namespace Windows_Programing_06
                 PlayListViewer.Items.Add(Get_Play_List.getYoutubeVideoTitle(Playlist_ArrayList[x].ToString()));
             }
 
-            chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            Thread.Sleep(800);
 
-            Play_Music_Title.Text = chromeDriver.Title.ToString();
+            try
+            {
+                chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine(e); 
+            }
+
+            try
+            {
+                chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
             // 크롬 드라이버 css를 통해서 버튼을 클릭하여 원하는 동작을 실행
             chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
@@ -94,8 +111,6 @@ namespace Windows_Programing_06
             Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
             chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
             Play_Music_Title.Text = chromeDriver.Title.ToString();
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
             TotalTime.Text = totalTimeElement.Text;
@@ -117,8 +132,6 @@ namespace Windows_Programing_06
             Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
             chromeDriver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
             Play_Music_Title.Text = chromeDriver.Title.ToString();
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
-            chromeDriver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             IWebElement totalTimeElement = chromeDriver.FindElement(By.CssSelector(".ytp-time-duration"));
 

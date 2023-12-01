@@ -32,6 +32,8 @@ namespace Windows_Programing_06
         private ChromeOptions chromeOptions; //Default value of chromeOptions is null
         private IWebDriver driver; //Default value of driver is null
 
+        int timer_Started = -1;
+
         public void LoadChrome()
         {
             try
@@ -40,8 +42,8 @@ namespace Windows_Programing_06
                 chromeOptions = new ChromeOptions();
                 chromeOptions.BinaryLocation = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
                 ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
-                //driverService.HideCommandPromptWindow = true;
-                //chromeOptions.AddArgument("--headless");
+                driverService.HideCommandPromptWindow = true;
+                chromeOptions.AddArgument("--headless");
                 driver = new ChromeDriver(driverService, chromeOptions);
             }
             catch (Exception ex)
@@ -70,25 +72,15 @@ namespace Windows_Programing_06
                 driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
                 Play_Music_Title.Text = driver.Title.ToString();
                 MusicTimer.Stop();
-
+                driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
             }
             catch (Exception e) 
             {
                 Console.WriteLine(e); 
             }
 
-            try
-            {
-                driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
             // 크롬 드라이버 css를 통해서 버튼을 클릭하여 원하는 동작을 실행
             driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
-            Thread.Sleep(1000);
             driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-right-controls > button:nth-child(2)")).Click();
 
             // 전체 시간 요소 찾기 (이 부분은 웹 페이지의 HTML 구조에 따라 조절해야 함)
@@ -155,7 +147,15 @@ namespace Windows_Programing_06
         private void Play_Button_Click(object sender, EventArgs e)
         {
             driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
-            MusicTimer.Start();
+            timer_Started = timer_Started * -1;
+            if (timer_Started == -1)
+            {
+                Play_Button.Text = "재생";
+            }
+            else if (timer_Started == 1)
+            {
+                Play_Button.Text = "정지";
+            }
         }
 
         int minute = 0;
@@ -163,8 +163,11 @@ namespace Windows_Programing_06
 
         private void MusicTimer_Tick(object sender, EventArgs e)
         {
-            MusicTimer.Interval = 1000;
-            second = second + 1;
+            if (timer_Started == 1)
+            {
+                MusicTimer.Interval = 1000;
+                second = second + 1;
+            }
             if (second == 60)
             {
                 minute = minute + 1;
@@ -181,6 +184,11 @@ namespace Windows_Programing_06
         private void Player_FormClosed(object sender, FormClosedEventArgs e)
         {
             driver.Quit();
+        }
+
+        private void Timer_Stop_Click(object sender, EventArgs e)
+        {
+            timer_Started = -1;
         }
     }
 }

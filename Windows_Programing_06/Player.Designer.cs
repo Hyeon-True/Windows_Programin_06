@@ -41,6 +41,7 @@
             this.TotalTime = new System.Windows.Forms.Label();
             this.Current_Time_Label = new System.Windows.Forms.Label();
             this.MusicTimer = new System.Windows.Forms.Timer(this.components);
+            this.Timer_Stop = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // Playlist_Add_Text_Box
@@ -175,7 +176,7 @@
             this.Play_Button.Name = "Play_Button";
             this.Play_Button.Size = new System.Drawing.Size(75, 53);
             this.Play_Button.TabIndex = 6;
-            this.Play_Button.Text = "정지";
+            this.Play_Button.Text = "재생";
             this.Play_Button.UseSelectable = true;
             this.Play_Button.Click += new System.EventHandler(this.Play_Button_Click);
             // 
@@ -220,11 +221,22 @@
             // 
             this.MusicTimer.Tick += new System.EventHandler(this.MusicTimer_Tick);
             // 
+            // Timer_Stop
+            // 
+            this.Timer_Stop.Location = new System.Drawing.Point(428, 287);
+            this.Timer_Stop.Name = "Timer_Stop";
+            this.Timer_Stop.Size = new System.Drawing.Size(75, 23);
+            this.Timer_Stop.TabIndex = 12;
+            this.Timer_Stop.Text = "비상";
+            this.Timer_Stop.UseSelectable = true;
+            this.Timer_Stop.Click += new System.EventHandler(this.Timer_Stop_Click);
+            // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 450);
+            this.Controls.Add(this.Timer_Stop);
             this.Controls.Add(this.Current_Time_Label);
             this.Controls.Add(this.TotalTime);
             this.Controls.Add(this.label1);
@@ -259,5 +271,6 @@
         private System.Windows.Forms.Label TotalTime;
         private System.Windows.Forms.Label Current_Time_Label;
         private System.Windows.Forms.Timer MusicTimer;
+        private MetroFramework.Controls.MetroButton Timer_Stop;
     }
 }

@@ -41,7 +41,6 @@
             this.TotalTime = new System.Windows.Forms.Label();
             this.Current_Time_Label = new System.Windows.Forms.Label();
             this.MusicTimer = new System.Windows.Forms.Timer(this.components);
-            this.Timer_Stop = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // Playlist_Add_Text_Box
@@ -193,7 +192,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(363, 287);
+            this.label1.Location = new System.Drawing.Point(468, 292);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(11, 12);
             this.label1.TabIndex = 9;
@@ -202,7 +201,7 @@
             // TotalTime
             // 
             this.TotalTime.AutoSize = true;
-            this.TotalTime.Location = new System.Drawing.Point(371, 288);
+            this.TotalTime.Location = new System.Drawing.Point(476, 293);
             this.TotalTime.Name = "TotalTime";
             this.TotalTime.Size = new System.Drawing.Size(27, 12);
             this.TotalTime.TabIndex = 10;
@@ -211,7 +210,7 @@
             // Current_Time_Label
             // 
             this.Current_Time_Label.AutoSize = true;
-            this.Current_Time_Label.Location = new System.Drawing.Point(338, 288);
+            this.Current_Time_Label.Location = new System.Drawing.Point(443, 293);
             this.Current_Time_Label.Name = "Current_Time_Label";
             this.Current_Time_Label.Size = new System.Drawing.Size(27, 12);
             this.Current_Time_Label.TabIndex = 11;
@@ -221,22 +220,11 @@
             // 
             this.MusicTimer.Tick += new System.EventHandler(this.MusicTimer_Tick);
             // 
-            // Timer_Stop
-            // 
-            this.Timer_Stop.Location = new System.Drawing.Point(428, 287);
-            this.Timer_Stop.Name = "Timer_Stop";
-            this.Timer_Stop.Size = new System.Drawing.Size(75, 23);
-            this.Timer_Stop.TabIndex = 12;
-            this.Timer_Stop.Text = "비상";
-            this.Timer_Stop.UseSelectable = true;
-            this.Timer_Stop.Click += new System.EventHandler(this.Timer_Stop_Click);
-            // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 450);
-            this.Controls.Add(this.Timer_Stop);
             this.Controls.Add(this.Current_Time_Label);
             this.Controls.Add(this.TotalTime);
             this.Controls.Add(this.label1);
@@ -271,6 +259,5 @@
         private System.Windows.Forms.Label TotalTime;
         private System.Windows.Forms.Label Current_Time_Label;
         private System.Windows.Forms.Timer MusicTimer;
-        private MetroFramework.Controls.MetroButton Timer_Stop;
     }
 }

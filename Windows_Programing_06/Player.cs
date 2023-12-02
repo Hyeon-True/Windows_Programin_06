@@ -24,6 +24,7 @@ namespace Windows_Programing_06
     public partial class Player : MetroFramework.Forms.MetroForm
     {
         ArrayList Playlist_ArrayList = new ArrayList();
+        ArrayList Add_Playlist_ArrayList = new ArrayList();
         ArrayList Playlist_Title_ArrayList = new ArrayList();
         public int index = 0;
 
@@ -32,7 +33,7 @@ namespace Windows_Programing_06
         private ChromeOptions chromeOptions; //Default value of chromeOptions is null
         private IWebDriver driver; //Default value of driver is null
 
-        int timer_Started = -1;
+        int timer_Started = 1;
 
         public void LoadChrome()
         {
@@ -41,10 +42,9 @@ namespace Windows_Programing_06
                 Environment.SetEnvironmentVariable("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
                 chromeOptions = new ChromeOptions();
                 chromeOptions.BinaryLocation = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe";
-                ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
-                driverService.HideCommandPromptWindow = true;
-                chromeOptions.AddArgument("--headless");
-                driver = new ChromeDriver(driverService, chromeOptions);
+                //chromeOptions.HideCommandPromptWindow = true;
+                //chromeOptions.AddArgument("--headless");
+                driver = new ChromeDriver(chromeOptions);
             }
             catch (Exception ex)
             {
@@ -94,8 +94,14 @@ namespace Windows_Programing_06
 
         private void Add_Music_Button_Click(object sender, EventArgs e)
         {
+            for (int x = 1; x < Playlist_ArrayList.Count - 1; x++ )
+            {
+                Add_Playlist_ArrayList.Add(Playlist_ArrayList[index + x]);
+            }
+            Playlist_ArrayList.RemoveRange(index + 1, Playlist_ArrayList.Count - 1);
             Playlist_ArrayList.Add(Playlist_Add_Text_Box.Text);
-            PlayListViewer.Items.Add(Get_Play_List.getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
+            Playlist_ArrayList.AddRange(Add_Playlist_ArrayList);
+            PlayListViewer.Items.Insert(index + 1, Get_Play_List.getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
         }
 
         private void Previous_Song_Button_Click(object sender, EventArgs e)

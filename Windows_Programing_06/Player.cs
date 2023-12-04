@@ -105,50 +105,56 @@ namespace Windows_Programing_06
 
         private void Previous_Song_Button_Click(object sender, EventArgs e)
         {
-            if (index < 0)
+            if (index <= 0)
             {
                 index++;
                 MessageBox.Show("첫번째 곡입니다.");
             }
-            index -= 1;
-            Play_Music_Address.Text = "";
-            Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
-            driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
-            Play_Music_Title.Text = driver.Title.ToString();
+            else
+            {
+                index--;
+                Play_Music_Address.Text = "";
+                Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
+                driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+                Play_Music_Title.Text = driver.Title.ToString();
 
-            IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
-            TotalTime.Text = totalTimeElement.Text;
+                IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
+                TotalTime.Text = totalTimeElement.Text;
 
-            TotalTime.Text = totalTimeElement.Text;
+                TotalTime.Text = totalTimeElement.Text;
 
-            //driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+                //driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
 
-            minute = 0;
-            second = 0;
+                minute = 0;
+                second = 0;
+            }
         }
 
         private void Next_Song_Burton_Click(object sender, EventArgs e)
         {
-            if (index >= Playlist_ArrayList.Count)
+            if (index + 1 >= Playlist_ArrayList.Count)
             {
                 index--;
                 MessageBox.Show("마지막 곡입니다.\n 노래를 추가해주세요");
             }
-            index += 1;
-            Play_Music_Address.Text = "";
-            Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
-            driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
-            Play_Music_Title.Text = driver.Title.ToString();
+            else
+            {
+                index++;
+                Play_Music_Address.Text = "";
+                Play_Music_Address.AppendText(Playlist_ArrayList[index].ToString());
+                driver.Navigate().GoToUrl(Playlist_ArrayList[index].ToString());
+                Play_Music_Title.Text = driver.Title.ToString();
 
-            IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
-            TotalTime.Text = totalTimeElement.Text;
+                IWebElement totalTimeElement = driver.FindElement(By.CssSelector(".ytp-time-duration"));
+                TotalTime.Text = totalTimeElement.Text;
 
-            TotalTime.Text = totalTimeElement.Text;
+                TotalTime.Text = totalTimeElement.Text;
 
-            //driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
+                //driver.FindElement(By.CssSelector("#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button")).Click();
 
-            minute = 0;
-            second = 0;
+                minute = 0;
+                second = 0;
+            }
         }
 
         private void Play_Button_Click(object sender, EventArgs e)

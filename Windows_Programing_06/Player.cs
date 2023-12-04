@@ -19,13 +19,13 @@ using System.Web.UI.WebControls;
 using MetroFramework.Drawing.Html;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
+using System.Diagnostics;
 
 namespace Windows_Programing_06
 {
     public partial class Player : MetroFramework.Forms.MetroForm
     {
         ArrayList Playlist_ArrayList = new ArrayList();
-        ArrayList Add_Playlist_ArrayList = new ArrayList();
         ArrayList Playlist_Title_ArrayList = new ArrayList();
         public int index = 0;
 
@@ -92,14 +92,15 @@ namespace Windows_Programing_06
 
         private void Add_Music_Button_Click(object sender, EventArgs e)
         {
-            for (int x = 1; x < Playlist_ArrayList.Count - 1; x++ )
+            if (Playlist_Add_Text_Box.Text == "이곳에 유튜브 주소를 입력하여 주세요")
             {
-                Add_Playlist_ArrayList.Add(Playlist_ArrayList[index + x]);
+                Process.Start("chrome.exe", "http://localhost:3000");
             }
-            Playlist_ArrayList.RemoveRange(index + 1, Playlist_ArrayList.Count - 1);
-            Playlist_ArrayList.Add(Playlist_Add_Text_Box.Text);
-            Playlist_ArrayList.AddRange(Add_Playlist_ArrayList);
-            PlayListViewer.Items.Insert(index + 1, Get_Play_List.getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
+            else
+            {
+                Playlist_ArrayList.Insert(index + 1, Playlist_Add_Text_Box.Text);
+                PlayListViewer.Items.Insert(index + 1, Get_Play_List.getYoutubeVideoTitle(Playlist_Add_Text_Box.Text));
+            }
         }
 
         private void Previous_Song_Button_Click(object sender, EventArgs e)

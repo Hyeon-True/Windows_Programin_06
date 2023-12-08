@@ -27,7 +27,7 @@ namespace Windows_Programing_06
             youtube = new YouTubeService(new BaseClientService.Initializer
             {
                 ApplicationName = "Show",
-                ApiKey = "AIzaSyDA2F0nMYDNf - Xexf1w1JEdhE924WuATeA",
+                ApiKey = "your API key",
             });
         }
 

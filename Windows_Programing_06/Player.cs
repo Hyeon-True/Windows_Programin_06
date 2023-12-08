@@ -28,6 +28,7 @@ namespace Windows_Programing_06
         ArrayList Playlist_ArrayList = new ArrayList();
         ArrayList Playlist_Title_ArrayList = new ArrayList();
         public int index = 0;
+        public int add_index = 0;
 
         private string url = "https://www.youtube.com/watch?v=pyf8cbqyfPs";
 
@@ -92,9 +93,9 @@ namespace Windows_Programing_06
 
         private void Add_Music_Button_Click(object sender, EventArgs e)
         {
-            if (Playlist_Add_Text_Box.Text == "이곳에 유튜브 주소를 입력하여 주세요")
+            if (Playlist_Add_Text_Box.Text == "링크연결")
             {
-                Process.Start("chrome.exe", "http://localhost:3000");
+                Process.Start("chrome.exe", "http://localhost:3000/?userid=roy");
             }
             else
             {
@@ -177,6 +178,7 @@ namespace Windows_Programing_06
 
         private void MusicTimer_Tick(object sender, EventArgs e)
         {
+
             if (timer_Started == 1)
             {
                 MusicTimer.Interval = 1000;
@@ -193,6 +195,7 @@ namespace Windows_Programing_06
             {
                 Next_Song_Burton_Click(sender, new EventArgs());
             }
+
         }
 
         private void Player_FormClosed(object sender, FormClosedEventArgs e)
